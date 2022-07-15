@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
-  Modal,
-  TouchableWithoutFeedback,
   Keyboard,
   Alert
 } from 'react-native';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -19,13 +19,17 @@ import { CategorySelectButton } from "../../components/Form/CategorySelectButton
 
 import { CategorySelect } from "../CategorySelect";
 
+
+
 import {
   Container,
   Header,
   Title,
   Form,
   Fields,
-  TransactionsTypes
+  TransactionsTypes,
+  ButtonWithoutFeedback,
+  ModalView
 } from './styles';
 
 interface FormData {
@@ -39,12 +43,14 @@ const schema = Yup.object().shape({
     .required('Name is required'),
   amount: Yup
     .number()
+    .transform((_value, originalValue) => Number(originalValue.replace(/,/g, '')))
     .typeError('type a number')
     .positive('Only positive numbers')
     .required('amount is required')
 })
 
 export function Register() {
+  const dataKey = '@goFinance:transactions';
   const [transactionType, setTransactionType] = useState('');
   const [categoryModalOpen, setCategoryModalOpen] = useState(false);
 
@@ -69,31 +75,50 @@ export function Register() {
     setCategoryModalOpen(true);
   }
   function handleCloseSelectCategoryModal() {
-    console.log('Here')
     setCategoryModalOpen(false);
   }
 
-  function handleRegister(form: FormData) {
+  async function handleRegister(form: FormData) {
     if (!transactionType)
       return Alert.alert('Select the transaction type.  Income | Outcome')
 
     if (category.key === 'category')
       return Alert.alert('Select one category.')
 
-
-
-    const data = {
+    const newTransaction = {
       name: form.name,
       amount: form.amount,
       transactionType,
       category: category.key
     }
 
+    try {
+      const data = await AsyncStorage.getItem(dataKey)
+      const currentData = data ? JSON.parse(data) : [];
 
-    console.log(data)
+      const dataFormatted = [
+        ...currentData,
+        newTransaction
+      ]
+
+      await AsyncStorage.setItem(dataKey, JSON.stringify(dataFormatted));
+
+    } catch (error) {
+      console.log(error)
+      Alert.alert('Sorry, we could not create it.')
+    }
   }
+
+  useEffect(() => {
+    async function loadData() {
+      const data = await AsyncStorage.getItem(dataKey)
+      console.log(JSON.parse(data!))
+    }
+    loadData();
+  }, [])
+
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <ButtonWithoutFeedback onPress={Keyboard.dismiss}>
       <Container>
         <Header>
           <Title>Registration</Title>
@@ -143,14 +168,14 @@ export function Register() {
           />
 
         </Form>
-        <Modal visible={categoryModalOpen}>
+        <ModalView visible={categoryModalOpen}>
           <CategorySelect
             category={category}
             setCategory={setCategory}
             closeSelectCategory={handleCloseSelectCategoryModal}
           />
-        </Modal>
+        </ModalView>
       </Container>
-    </TouchableWithoutFeedback>
+    </ButtonWithoutFeedback>
   );
 }

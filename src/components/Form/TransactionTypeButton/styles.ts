@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components/native";
-import { TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { RFValue } from "react-native-responsive-fontsize";
 import { RectButton } from 'react-native-gesture-handler'
@@ -15,9 +14,6 @@ interface ContainerProps {
 
 export const Container = styled.View<ContainerProps>`
   width: 48%;
-  
-
-  
 
   border-width: ${({isActive}) => isActive ? 0 : 1.5}px ;
   border-style: solid;
@@ -31,7 +27,6 @@ export const Container = styled.View<ContainerProps>`
   ${({isActive, type}) => isActive && type === 'down' && css`
     background-color: ${({theme})=> theme.colors.attention_light};
   `};
-
 `;
 
 export const Button = styled(RectButton)`

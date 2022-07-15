@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Container,
+  ButtonContainer,
   Category,
   Icon
 } from './styles';
@@ -16,9 +16,9 @@ export function CategorySelectButton({
   onPress
 }: Props) {
   return (
-    <Container onPress={onPress}>
+    <ButtonContainer onPress={onPress}>
       <Category>{title}</Category>
       <Icon name="chevron-down" />
-    </Container>
+    </ButtonContainer>
   );
 }
