@@ -5,10 +5,7 @@ import { BorderlessButton } from 'react-native-gesture-handler'
 
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
 import { getBottomSpace, getStatusBarHeight } from 'react-native-iphone-x-helper';
-
 import { DataListProps } from '.';
-
-
 
 
 export const Container = styled.View`
@@ -106,3 +103,10 @@ export const TransactionList = styled(
     paddingBottom: getBottomSpace()
   }
 })``;
+
+export const LoadContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+export const Load = styled.ActivityIndicator``;

@@ -16,7 +16,9 @@ export function CategorySelectButton({
   onPress
 }: Props) {
   return (
-    <ButtonContainer onPress={onPress}>
+    <ButtonContainer
+      onPress={onPress}
+    >
       <Category>{title}</Category>
       <Icon name="chevron-down" />
     </ButtonContainer>
