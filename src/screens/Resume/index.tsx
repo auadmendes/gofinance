@@ -162,6 +162,8 @@ export function Resume() {
                   <>
                     <ChartContainer>
                       <VictoryPie
+                        //labelRadius={({ innerRadius }) => innerRadius + 5}
+                        innerRadius={70}
                         data={totalByCategories}
                         colorScale={totalByCategories.map(category => category.color)}
                         style={{
@@ -170,8 +172,9 @@ export function Resume() {
                             fontWeight: 'bold',
                             fill: theme.colors.shape
                           }
+
                         }}
-                        labelRadius={50}
+                        labelRadius={85}
                         x="percent"
                         y="total"
                       />
