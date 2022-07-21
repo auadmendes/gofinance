@@ -6,9 +6,7 @@ import React, {
 
 import * as AuthSession from 'expo-auth-session';
 
-//409241814456-5tvgvfjefkes7l7gqsqtusdgj8lbctd9.apps.googleusercontent.com
 
-//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
 
 interface AuthProvideProps {
   children: ReactNode;
@@ -39,8 +37,8 @@ function AuthProvider({ children }: AuthProvideProps) {
 
   async function signWithGoogle() {
     try {
-      const CLIENT_ID = '409241814456-5tvgvfjefkes7l7gqsqtusdgj8lbctd9.apps.googleusercontent.com';
-      const REDIRECT_URI = 'https://auth.expo.io/@horta/gofinance';
+      const CLIENT_ID = '*****';
+      const REDIRECT_URI = '*****';
       const RESPONSE_TYPE = 'token';
       const SCOPE = encodeURI('profile email');
 
