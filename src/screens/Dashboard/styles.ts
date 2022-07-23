@@ -39,10 +39,13 @@ export const UserInfo = styled.View`
   align-items: center;
 `;
 
+
  export const Photo = styled.Image`
-  width: ${RFValue(48)}px;
-  height: ${RFValue(48)}px;
-  border-radius: 10px;
+  width: ${RFValue(56)}px;
+  height: ${RFValue(56)}px;
+  border-radius: 50px;
+  border-width: 1px;
+  border-color: ${({ theme }) => theme.colors.shape};
  `;
 
  export const User = styled.View`
@@ -110,3 +113,7 @@ export const LoadContainer = styled.View`
   align-items: center;
 `;
 export const Load = styled.ActivityIndicator``;
+
+export const PhotoContainer = styled.TouchableOpacity`
+  
+`;

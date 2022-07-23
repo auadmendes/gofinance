@@ -53,3 +53,6 @@ export const FooterWrapper = styled.View`
 
   justify-content: space-between;
 `;
+
+export const Load = styled.ActivityIndicator`
+`;

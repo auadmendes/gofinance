@@ -20,6 +20,7 @@ import { TransactionTypeButton } from '../../components/Form/TransactionTypeButt
 import { CategorySelectButton } from "../../components/Form/CategorySelectButton";
 import { CategorySelect } from "../CategorySelect";
 
+import { useAuth } from "../../hooks/auth";
 
 
 import {
@@ -54,6 +55,8 @@ export function Register() {
   const [transactionType, setTransactionType] = useState('');
   const [categoryModalOpen, setCategoryModalOpen] = useState(false);
 
+  const { user } = useAuth();
+
   const [category, setCategory] = useState({
     key: 'category',
     name: 'category'
@@ -82,7 +85,6 @@ export function Register() {
   }
 
   async function handleRegister(form: FormData) {
-    //await AsyncStorage.removeItem('@goFinance:transactions')
     if (!transactionType)
       return Alert.alert('Select the transaction type.  Income | Outcome')
 
@@ -99,7 +101,7 @@ export function Register() {
     }
 
     try {
-      const dataKey = '@goFinance:transactions';
+      const dataKey = `@goFinance:transactions_user:${user.id}`;
       const data = await AsyncStorage.getItem(dataKey)
       const currentData = data ? JSON.parse(data) : [];
 
@@ -124,8 +126,6 @@ export function Register() {
       Alert.alert('Sorry, we could not create it.')
     }
   }
-
-
 
   return (
     <ButtonWithoutFeedback onPress={Keyboard.dismiss}>

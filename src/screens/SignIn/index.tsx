@@ -1,6 +1,7 @@
-import React from 'react';
-import { Alert } from 'react-native';
+import React, { useState } from 'react';
+import { Alert, Platform } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { useTheme } from 'styled-components';
 
 import AppleSvg from '../../assets/icons/apple.svg';
 import GoogleSvg from '../../assets/icons/google-icon.svg';
@@ -16,17 +17,31 @@ import {
   Title,
   SignInTitle,
   Footer,
-  FooterWrapper
+  FooterWrapper,
+  Load
 } from './styles';
 
 export function SignIn() {
-  const { signWithGoogle } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
+  const { signWithGoogle, signInWithApple } = useAuth();
+  const { colors } = useTheme();
 
   async function handleSignWithGoogle() {
     try {
-      await signWithGoogle();
+      setIsLoading(true);
+      return await signWithGoogle();
     } catch (error) {
       Alert.alert('o programador que fez isso é burro e nós não conseguimos conectar. ' + error)
+      setIsLoading(false);
+    }
+  }
+  async function handleSignWithGApple() {
+    try {
+      setIsLoading(true);
+      return await signInWithApple();
+    } catch (error) {
+      Alert.alert('o programador que fez isso é burro e nós não conseguimos conectar. ' + error)
+      setIsLoading(false);
     }
   }
 
@@ -52,16 +67,20 @@ export function SignIn() {
       <Footer>
         <FooterWrapper>
           <SignInSocialButton
-            onPress={handleSignWithGoogle}
             title='Sign in with Google'
             svg={GoogleSvg}
+            onPress={handleSignWithGoogle}
           />
-          <SignInSocialButton
-
-            title='Sign in with Apple'
-            svg={AppleSvg}
-          />
+          {
+            Platform.OS === 'ios' &&
+            <SignInSocialButton
+              title='Sign in with Apple'
+              svg={AppleSvg}
+              onPress={handleSignWithGApple}
+            />
+          }
         </FooterWrapper>
+        {isLoading && <Load color={colors.shape} style={{ marginTop: 18 }} />}
       </Footer>
     </Container>
   );
