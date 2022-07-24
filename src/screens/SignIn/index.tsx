@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
-import { Alert, Platform } from 'react-native';
-import { RFValue } from 'react-native-responsive-fontsize';
+import React, { useState, useEffect } from 'react';
+import { Alert, Platform, BackHandler } from 'react-native';
+
+import { useAuth } from '../../hooks/auth';
 import { useTheme } from 'styled-components';
 
 import AppleSvg from '../../assets/icons/apple.svg';
 import GoogleSvg from '../../assets/icons/google-icon.svg';
+
 import LogoSvg from '../../assets/icons/logo.svg';
 import { SignInSocialButton } from '../../components/SignInSocialButton';
 
-import { useAuth } from '../../hooks/auth';
+import { RFValue } from 'react-native-responsive-fontsize';
+
 
 import {
   Container,
@@ -44,6 +47,14 @@ export function SignIn() {
       setIsLoading(false);
     }
   }
+
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+
+      return true;
+    })
+
+  }, [])
 
   return (
     <Container>

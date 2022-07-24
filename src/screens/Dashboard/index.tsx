@@ -160,7 +160,7 @@ export function Dashboard() {
     setIsLoading(false)
   }
 
-  async function handleAlert() {
+  async function handleAlertDeleteAllData() {
     const dataKey = `@goFinance:transactions_user:${user.id}`;
 
     Alert.alert(
@@ -170,7 +170,7 @@ export function Dashboard() {
         {
           text: 'Yes', onPress: () => {
             AsyncStorage.removeItem(dataKey)
-            loadTransactions();
+            signOut();
           }
         },
         {
@@ -182,9 +182,6 @@ export function Dashboard() {
     )
   }
 
-  async function handleDeleteAllData() {
-
-  }
 
   async function handleDeleteTransaction(TransactionId: string) {
     const dataKey = `@goFinance:transactions_user:${user.id}`;
@@ -215,19 +212,6 @@ export function Dashboard() {
 
   }
 
-  async function handleDeleteTransactionsss(TransactionId: string) {
-    const dataKey = `@goFinance:transactions_user:${user.id}`;
-
-    const response = await AsyncStorage.getItem(dataKey);
-    const transactions = response ? JSON.parse(response) : [];
-
-    const newNotes = transactions
-      .filter((item: DataListProps) => item.id !== TransactionId)
-
-    await AsyncStorage.setItem(dataKey, JSON.stringify(newNotes));
-    loadTransactions();
-  }
-
 
   useEffect(() => {
     loadTransactions();
@@ -252,7 +236,7 @@ export function Dashboard() {
             <Header>
               <UserWrapper>
                 <UserInfo>
-                  <PhotoContainer onLongPress={handleDeleteAllData}>
+                  <PhotoContainer onLongPress={handleAlertDeleteAllData}>
                     <Photo source={{ uri: user.photo }} />
                   </PhotoContainer>
                   <User>

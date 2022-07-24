@@ -17,6 +17,7 @@ import { categories } from '../../categories';
 
 import { RFValue } from 'react-native-responsive-fontsize';
 
+import { View } from 'react-native';
 import {
   Container,
   Title,

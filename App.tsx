@@ -5,6 +5,9 @@ import 'react-native-gesture-handler';
 import 'intl';
 import 'intl/locale-data/jsonp/pt-BR';
 
+import { LogBox } from 'react-native';
+import { YellowBox } from 'react-native';
+
 import {
   useFonts,
   Poppins_400Regular,
@@ -19,6 +22,10 @@ import { Routes } from './src/routes';
 import { AuthProvider, useAuth } from './src/hooks/auth';
 
 export default function App() {
+  LogBox.ignoreLogs(['Warning: ...']);
+  LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+  LogBox.ignoreAllLogs();//Ignore all log notifications
+
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_500Medium,
