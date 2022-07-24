@@ -37,6 +37,8 @@
   <img width="100" alt="gofiance" src="https://user-images.githubusercontent.com/5294488/180665435-70e6fae2-ecf4-4ada-a3c7-5ffabeaba828.jpg">
   <img width="100" alt="gofiance" src="https://user-images.githubusercontent.com/5294488/180665458-7a12d5a6-9904-49e2-9aea-5295bde52231.PNG">
   <img width="100" alt="gofiance" src="https://user-images.githubusercontent.com/5294488/180665502-5d0a379f-7aab-4735-b9c6-93c1be2cd3ed.PNG">
+  </div>
+  <div class="column">
   <img width="100" alt="gofiance" src="https://user-images.githubusercontent.com/5294488/180665523-1fb3df81-974c-40fc-9b85-afb0de806607.PNG">
   <img width="100" alt="gofiance" src="https://user-images.githubusercontent.com/5294488/180665634-25a7996a-2f19-4e55-8236-40acfccbd97c.jpeg">
   <img width="100" alt="gofiance" src="https://user-images.githubusercontent.com/5294488/180665543-3975e418-ff2a-4622-a447-c7d837bf1841.PNG">
